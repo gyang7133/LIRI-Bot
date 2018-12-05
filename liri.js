@@ -15,7 +15,8 @@ let spotify = new Spotify(keys.spotify);
 let input1 = process.argv[2];
 let input2 = process.argv[3];
 
-
+//This will search the Bands in Town Artist Events API (https://rest.bandsintown.com/artists/${artist}/events?app_id=codingbootcamp) for 
+// an artist and render the following information about each event to the terminal:
 const getConcertInfo = function(input){
 
     //Setup API Call
@@ -24,11 +25,11 @@ const getConcertInfo = function(input){
         
         if (!error && response.statusCode === 200) {
             var parsedBody = JSON.parse(body);
-            parsedBody.forEach(function (element) {
+            parsedBody.forEach(function (e) {
                 console.log('-------------------------------------------------------------------');
-                console.log("Venue: " + element.venue.name);
-                console.log("Venue Location: " + element.venue.city);
-                console.log("Event Date: " + element.datetime);
+                console.log("Venue: " + e.venue.name);
+                console.log("Venue Location: " + e.venue.city);
+                console.log("Event Date: " + e.datetime);
                 console.log('-------------------------------------------------------------------');
             }, this);
         }
@@ -36,6 +37,7 @@ const getConcertInfo = function(input){
 
 }
 
+// This will show the following information about the song in your terminal/bash window
 const getSpotifySong = function(input){
     if(!input){
         input = "What's My Age Again"
@@ -52,15 +54,13 @@ const getSpotifySong = function(input){
         console.log("album: " + data.tracks.items[0].album.name);
         console.log('-------------------------------------------------------------------');
         
-          
-        // console.log(`Song Name : ${name.toUpperCase()}\nAlbum : ${data.tracks.items[0].album.name}\nArtist : ${data.tracks.items[0].album.artists[0].name}\nURL : ${data.tracks.items[0].album.external_urls.spotify}`);
     });
 }
 
-
+// This will show the following information about the movie in your terminal/bash window
 const getMovieInfo = function(input){
     if(!input){
-        input = "Mr.Nobody"
+        input = "Mr.Nobody";
     }
     //Setup API Call
     let queryUrl = (`http://www.omdbapi.com/?t=${input}&plot=short&apikey=trilogy`);
