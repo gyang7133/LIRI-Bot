@@ -27,6 +27,7 @@ const getConcertInfo = function(input){
             var parsedBody = JSON.parse(body);
             parsedBody.forEach(function (e) {
                 console.log('-------------------------------------------------------------------');
+                console.log("Artist: " + e.lineup[0]);
                 console.log("Venue: " + e.venue.name);
                 console.log("Venue Location: " + e.venue.city);
                 console.log("Event Date: " + e.datetime);
@@ -119,7 +120,7 @@ switch (input1){
       doFromTxt(input2);
       break;
     default:
-    break;
+        break;
 
 }
 
