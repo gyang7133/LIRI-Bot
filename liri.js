@@ -95,14 +95,6 @@ const doFromTxt = function(){
     });
 }
 
-//Challenge
-// In addition to logging the data to your terminal/bash window, output the data to a .txt file called log.txt.
-// Make sure you append each command you run to the log.txt file. 
-// Do not overwrite your file each time you run a command.
-let logcommand = process
-
-fs.writeFilte('log.txt', )
-
 //Initiate switch commands
 switch (input1){
 
@@ -125,4 +117,22 @@ switch (input1){
         break;
 
 }
+
+//Challenge
+// In addition to logging the data to your terminal/bash window, output the data to a .txt file called log.txt.
+// Make sure you append each command you run to the log.txt file. 
+// Do not overwrite your file each time you run a command.
+
+// let logcommand = process.argv[0];
+// fs.appendFile('log.txt', `, -${value}`, function(err) {
+//     if (err) {
+//       return console.log(err);
+//     }
+
+//     console.log("Outpt has been appended!")
+//   });
+
+//   fs.readFile('');
+
+
 
