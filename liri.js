@@ -1,42 +1,117 @@
-//Read and set ant environmental variables with the dotnv package
+//Read and set an environmental variables with the dotnv package
 require('dotenv').config();
 
 //Initial Node Packages
 const Spotify = require('node-spotify-api');
 const fs = require('fs');
-
+const request = require('request');
 
 
 //Import API Keys froms key.js file
-let key = require("./keys.js");
+let keys = require("./keys.js");
+let spotify = new Spotify(keys.spotify);
 
 //Set arguments that will be used by the pap to retrieve data from APIs
-
 let input1 = process.argv[2];
 let input2 = process.argv[3];
 
-const findConcert = function(){
-    
+
+const getConcertInfo = function(input){
+
+    //Setup API Call
+    let queryUrl = (`https://rest.bandsintown.com/artists/${input}/events?app_id=codingbootcamp`);
+    request(queryUrl, function (error, response, body) {
+        
+        if (!error && response.statusCode === 200) {
+            var parsedBody = JSON.parse(body);
+            parsedBody.forEach(function (element) {
+                console.log('-------------------------------------------------------------------');
+                console.log("Venue: " + element.venue.name);
+                console.log("Venue Location: " + element.venue.city);
+                console.log("Event Date: " + element.datetime);
+                console.log('-------------------------------------------------------------------');
+            }, this);
+        }
+    });
+
+}
+
+const getSpotifySong = function(input){
+    if(!input){
+        input = "What's My Age Again"
+    }
+    spotify.search({type: 'track', query: input }, function (err, data) {
+        if (err) {
+            return console.log('Error occurred: ' + err);
+        }
+
+        console.log('-------------------------------------------------------------------');
+        console.log("Artist: " + data.tracks.items[0].artists[0].name);
+        console.log("Song Name: " + data.tracks.items[0].name);
+        console.log("Preview link: " + data.tracks.items[0].preview_url);
+        console.log("album: " + data.tracks.items[0].album.name);
+        console.log('-------------------------------------------------------------------');
+        
+          
+        // console.log(`Song Name : ${name.toUpperCase()}\nAlbum : ${data.tracks.items[0].album.name}\nArtist : ${data.tracks.items[0].album.artists[0].name}\nURL : ${data.tracks.items[0].album.external_urls.spotify}`);
+    });
+}
+
+
+const getMovieInfo = function(input){
+    if(!input){
+        input = "Mr.Nobody"
+    }
+    //Setup API Call
+    let queryUrl = (`http://www.omdbapi.com/?t=${input}&plot=short&apikey=trilogy`);
+    request(queryUrl, function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+            console.log(body);
+            var parsedBody = JSON.parse(body);
+            console.log('-------------------------------------------------------------------');
+            console.log("Title: " + parsedBody.Title);
+            console.log("Year: " + parsedBody.Year);
+            console.log("IMDB Rating: " + parsedBody.imdbRating);
+            console.log("Rotten Tomatoes Rating: " + parsedBody.Ratings[1].Value);
+            console.log("Country: " + parsedBody.Country);
+            console.log("Language: " + parsedBody.Language);
+            console.log("Plot: " + parsedBody.Plot);
+            console.log("Actors: " + parsedBody.Actors);
+            console.log('-------------------------------------------------------------------');
+        }
+    });
+
+
+}
+
+const doFromTxt = function(){
+    fs.readFile("./random.txt", "utf8", function (error, data) {
+        if (error) {
+            return console.log(error);
+        }
+        getSpotifySong(data);
+    });
 }
 
 //Initiate switch commands
+switch (input1){
 
-switch (input1) 
-{
     case 'concert-this':
-    findConcert();
-    break;
+      getConcertInfo(input2);
+      break;
 
     case 'spotify-this-song':
-    findSpotify();
-    break;
+      getSpotifySong(input2);
+      break;
 
     case 'movie-this':
-    findMovie();
-    break;
+      getMovieInfo(input2);
+      break;
 
     case 'do-what-it-says':
-    toDo();
+      doFromTxt(input2);
+      break;
+    default:
     break;
 
 }

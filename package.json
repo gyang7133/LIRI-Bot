@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/gyang7133/Liri-node-app#readme",
   "dependencies": {
-    "npm": "^6.4.1"
+    "dotenv": "^6.2.0",
+    "node-spotify-api": "^1.0.7",
+    "npm": "^6.4.1",
+    "request": "^2.88.0"
   }
 }
