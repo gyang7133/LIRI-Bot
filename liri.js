@@ -84,6 +84,7 @@ const getMovieInfo = function(input){
 
 }
 
+// Using the fs Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
 const doFromTxt = function(){
     fs.readFile("./random.txt", "utf8", function (error, data) {
         if (error) {
@@ -92,6 +93,12 @@ const doFromTxt = function(){
         getSpotifySong(data);
     });
 }
+
+//Challenge
+// In addition to logging the data to your terminal/bash window, output the data to a .txt file called log.txt.
+// Make sure you append each command you run to the log.txt file. 
+// Do not overwrite your file each time you run a command.
+
 
 //Initiate switch commands
 switch (input1){
@@ -115,3 +122,4 @@ switch (input1){
     break;
 
 }
+
