@@ -52,7 +52,7 @@ const getSpotifySong = function(input){
         console.log("Artist: " + data.tracks.items[0].artists[0].name);
         console.log("Song Name: " + data.tracks.items[0].name);
         console.log("Preview link: " + data.tracks.items[0].preview_url);
-        console.log("album: " + data.tracks.items[0].album.name);
+        console.log("Album: " + data.tracks.items[0].album.name);
         console.log('-------------------------------------------------------------------');
         
     });
@@ -123,7 +123,9 @@ switch (input1){
 // Make sure you append each command you run to the log.txt file. 
 // Do not overwrite your file each time you run a command.
 
+//Append output in each functions above
 // let logcommand = process.argv[0];
+
 // fs.appendFile('log.txt', `, -${value}`, function(err) {
 //     if (err) {
 //       return console.log(err);
@@ -132,7 +134,6 @@ switch (input1){
 //     console.log("Outpt has been appended!")
 //   });
 
-//   fs.readFile('');
 
 
 
