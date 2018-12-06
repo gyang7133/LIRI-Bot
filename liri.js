@@ -67,7 +67,7 @@ const getMovieInfo = function(input){
     let queryUrl = (`http://www.omdbapi.com/?t=${input}&plot=short&apikey=trilogy`);
     request(queryUrl, function (error, response, body) {
         if (!error && response.statusCode === 200) {
-            console.log(body);
+            // console.log(body);
             var parsedBody = JSON.parse(body);
             console.log('-------------------------------------------------------------------');
             console.log("Title: " + parsedBody.Title);
